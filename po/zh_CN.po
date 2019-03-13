@@ -1,0 +1,95 @@
+# Chinese translations for time-admin package
+# time-admin 软件包的简体中文翻译.
+# Copyright (C) 2019 THE time-admin'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the time-admin package.
+# Automatically generated, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: time-admin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-03-12 17:59+0800\n"
+"PO-Revision-Date: 2019-03-12 18:01+0800\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=GB2312\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.1\n"
+
+#: src/main.c:91
+msgid "Time and Date Manager"
+msgstr "时间和日期管理"
+
+#: src/main.c:125 src/main.c:167
+msgid "open file"
+msgstr ""
+
+#: src/main.c:125
+msgid "Create pid file failed"
+msgstr ""
+
+#: src/main.c:134
+msgid "write file"
+msgstr ""
+
+#: src/main.c:134
+msgid "write pid file failed"
+msgstr ""
+
+#: src/main.c:167
+msgid "open pid file failed"
+msgstr ""
+
+#: src/main.c:172
+msgid "read file"
+msgstr ""
+
+#: src/main.c:172
+msgid "read pid file failed"
+msgstr ""
+
+#: src/main.c:208
+msgid "Time Zone:"
+msgstr "时区"
+
+#: src/main.c:219
+msgid "Ntp Sync:"
+msgstr "Ntp同步"
+
+#: src/main.c:270 src/time-tool.c:212
+msgid "Set Time"
+msgstr "设置时间"
+
+#: src/main.c:307
+msgid "Set Date"
+msgstr "设置日期"
+
+#: src/main.c:317
+msgid "Close"
+msgstr "关闭"
+
+#: src/main.c:324
+msgid "Save"
+msgstr "保存"
+
+#: src/main.c:363
+msgid "g_bus_get_sync"
+msgstr ""
+
+#: src/main.c:376
+msgid "g_bus_proxy_new"
+msgstr ""
+
+#: src/time-tool.c:123
+msgid "GetNtpState"
+msgstr ""
+
+#: src/time-tool.c:151 src/time-tool.c:192
+msgid "Set Ntp sync"
+msgstr ""
+
+#: src/time-tool.c:212
+msgid "NTP synchronization has been started, the modification is invalid"
+msgstr ""

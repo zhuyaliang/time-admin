@@ -1,0 +1,94 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the time-admin package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: time-admin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-03-12 17:59+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/main.c:91
+msgid "Time and Date Manager"
+msgstr ""
+
+#: src/main.c:125 src/main.c:167
+msgid "open file"
+msgstr ""
+
+#: src/main.c:125
+msgid "Create pid file failed"
+msgstr ""
+
+#: src/main.c:134
+msgid "write file"
+msgstr ""
+
+#: src/main.c:134
+msgid "write pid file failed"
+msgstr ""
+
+#: src/main.c:167
+msgid "open pid file failed"
+msgstr ""
+
+#: src/main.c:172
+msgid "read file"
+msgstr ""
+
+#: src/main.c:172
+msgid "read pid file failed"
+msgstr ""
+
+#: src/main.c:208
+msgid "Time Zone:"
+msgstr ""
+
+#: src/main.c:219
+msgid "Ntp Sync:"
+msgstr ""
+
+#: src/main.c:270 src/time-tool.c:212
+msgid "Set Time"
+msgstr ""
+
+#: src/main.c:307
+msgid "Set Date"
+msgstr ""
+
+#: src/main.c:317
+msgid "Close"
+msgstr ""
+
+#: src/main.c:324
+msgid "Save"
+msgstr ""
+
+#: src/main.c:363
+msgid "g_bus_get_sync"
+msgstr ""
+
+#: src/main.c:376
+msgid "g_bus_proxy_new"
+msgstr ""
+
+#: src/time-tool.c:123
+msgid "GetNtpState"
+msgstr ""
+
+#: src/time-tool.c:151 src/time-tool.c:192
+msgid "Set Ntp sync"
+msgstr ""
+
+#: src/time-tool.c:212
+msgid "NTP synchronization has been started, the modification is invalid"
+msgstr ""
