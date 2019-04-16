@@ -125,6 +125,73 @@ EXIT:
     return FALSE;
 
 }   
+
+const gchar *GetTimeZone(TimeAdmin *ta)
+{
+    GDBusProxy *proxy = NULL;
+    GError     *error = NULL;
+    GVariant   *ret;
+    GVariant   *timezone;
+
+    proxy = g_dbus_proxy_new_sync (ta->Connection,
+                                   G_DBUS_PROXY_FLAGS_NONE,
+                                   NULL,
+                                  "org.freedesktop.timedate1",
+                                  "/org/freedesktop/timedate1",
+                                  "org.freedesktop.DBus.Properties",
+                                   NULL,
+                                   &error);
+    if(proxy == NULL)
+    {
+        goto EXIT;
+    }
+ 
+    ret = g_dbus_proxy_call_sync (proxy,
+                                 "Get",
+                                  g_variant_new ("(ss)",
+                                 "org.freedesktop.timedate1",
+                                 "Timezone"),
+                                  G_DBUS_CALL_FLAGS_NONE,
+                                 -1,
+                                  NULL,
+                                  &error);
+    if(ret == NULL)
+    {
+        goto EXIT;
+    }
+    g_variant_get (ret, "(v)", &timezone);
+    return g_variant_get_string (timezone,0);
+
+EXIT:
+    g_error_free(error);
+    return NULL;
+
+}
+
+void SetTimeZone(GDBusProxy *proxy,const char *zone)
+{
+    GError *error = NULL;
+    GVariant *ret;
+    
+    ret = g_dbus_proxy_call_sync (proxy,
+                                 "SetTimezone",
+                                  g_variant_new ("(sb)",zone,0),
+                                  G_DBUS_CALL_FLAGS_NONE,
+                                  -1,
+                                  NULL,
+                                  &error);
+
+    if(ret == NULL)
+    {
+        MessageReport(_("Set time zone"),error->message,ERROR);
+    }    
+    else
+    {
+        
+    }
+
+
+}    
 static void ChangeSpinBttonState(TimeAdmin *ta,gboolean State)
 {
     gtk_widget_set_sensitive(ta->HourSpin,  !State);

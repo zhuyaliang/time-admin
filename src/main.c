@@ -16,6 +16,8 @@
 */
 
 #include "time-tool.h"
+#include "time-zone.h"
+#include "time-map.h"
 
 #define  LOCKFILE               "/tmp/time-admin.pid"
 #define  TIME_ADMIN_PERMISSION  "org.mate.user.admin.administration"
@@ -188,17 +190,26 @@ ERROREXIT:
     return TRUE;
 
 }        
-
+static char *translate(const char *value)
+{
+    g_autofree gchar *zone_translated = NULL;
+    char *name;
+    
+    zone_translated = g_strdup (dgettext (GETTEXT_PACKAGE_TIMEZONES,value));
+    name = g_strdup_printf (C_("timezone loc", "%s"),zone_translated);
+    
+    return name;
+}    
 static GtkWidget * TimeZoneAndNtp(TimeAdmin *ta)
 {
     GtkWidget  *table;
     GtkWidget  *TimeZoneLabel;
-    GtkWidget  *TimeZoneButton;
     GtkWidget  *NtpSyncLabel;
     GtkWidget  *NtpSyncSwitch;
     GTimeZone  *tz;
     const char *TimeZone;
     gboolean    NtpState;
+    char       *ZoneName;
 
     table = gtk_grid_new();
     gtk_grid_set_column_homogeneous(GTK_GRID(table),TRUE);
@@ -207,12 +218,18 @@ static GtkWidget * TimeZoneAndNtp(TimeAdmin *ta)
     gtk_widget_set_halign(TimeZoneLabel,GTK_ALIGN_START);
     SetLableFontType(TimeZoneLabel,"gray",11,_("Time Zone:"));
     gtk_grid_attach(GTK_GRID(table) ,TimeZoneLabel, 0 , 0 , 1 , 1);
-   
+    
+    SetupTimezoneDialog(ta); 
     tz = g_time_zone_new_local();
     TimeZone = g_time_zone_get_identifier(tz);
-    TimeZoneButton = gtk_button_new_with_label(TimeZone);
+    ZoneName = translate(TimeZone);
+    ta->TimeZoneButton = gtk_button_new_with_label(ZoneName);
+    g_signal_connect (ta->TimeZoneButton,
+                     "clicked",
+                      G_CALLBACK (RunTimeZoneDialog),
+                      ta);
 
-    gtk_grid_attach(GTK_GRID(table) ,TimeZoneButton,1 , 0 , 3 , 1);
+    gtk_grid_attach(GTK_GRID(table) ,ta->TimeZoneButton,1 , 0 , 3 , 1);
     
     NtpSyncLabel = gtk_label_new(NULL);
     gtk_widget_set_halign(NtpSyncLabel,GTK_ALIGN_START);
@@ -385,6 +402,7 @@ int main(int argc, char **argv)
 
     bindtextdomain (PACKAGE, LOCALEDIR);   
     textdomain (PACKAGE); 
+    bind_textdomain_codeset (GETTEXT_PACKAGE_TIMEZONES, "UTF-8"); 
     
     gtk_init(&argc, &argv);
     

@@ -1,7 +1,7 @@
 project('time-admin', 'c',
   version : '1.0.0',
   license : 'GPLv3',
-  meson_version : '>=0.40.1',
+  meson_version : '>=0.49.1',
   default_options : [ 'warning_level=1', 'buildtype=debugoptimized', 'c_std=gnu11'],
   )
 
@@ -87,7 +87,11 @@ add_global_link_arguments(
 
 # Dependencies
 gtk_req_version = '>= 3.0.0'
+gdk_pixbuf_dep =  '>=2.23.0'
 gtk_deps = dependency('gtk+-3.0', version: gtk_req_version)
+gdk_deps = dependency('gdk-pixbuf-2.0', version: '>= 2.23.0')
+mt_deps = dependency('mate-desktop-2.0')
+math_deps = cc.find_library('m', required: true)
 polkit_deps = dependency('polkit-gobject-1')
 
 # Configure data
@@ -112,5 +116,6 @@ configure_file(
 top_srcdir = include_directories('.')
 
 subdir('po')
+subdir('po-timezones')
 subdir('src')
 subdir('data')

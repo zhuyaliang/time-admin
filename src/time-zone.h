@@ -20,4 +20,57 @@
 
 #include "time-share.h"
 
+#ifndef __sun
+#  define TZ_DATA_FILE "/usr/share/zoneinfo/zone.tab"
+#else
+#  define TZ_DATA_FILE "/usr/share/lib/zoneinfo/tab/zone_sun.tab"
+#endif
+
+typedef struct TzDB
+{   
+    GPtrArray  *locations;
+    GHashTable *backward;
+}TzDB;
+    
+typedef struct TzLocation
+{   
+    gchar *country;
+    gdouble latitude;
+    gdouble longitude;
+    gchar *zone;
+    gchar *comment;
+
+    gdouble dist; /* distance to clicked point for comparison */
+}TzLocation;
+
+typedef struct TzInfo
+{
+    gchar *tzname_normal;
+    gchar *tzname_daylight;
+    glong utc_offset;
+    gint daylight;
+}TzInfo;
+TzDB      *tz_load_db                 (void);
+
+void       SetupTimezoneDialog        (TimeAdmin *ta);
+
+void       RunTimeZoneDialog          (GtkButton *button,
+                                       gpointer   data);
+
+void       TimeZoneDateBaseFree       (TzDB      *db);
+
+GPtrArray *tz_get_locations           (TzDB *db);
+
+TzInfo    *tz_info_from_location      (TzLocation *loc);
+
+glong      tz_location_get_utc_offset (TzLocation *loc);
+
+char      *tz_info_get_clean_name     (TzDB       *tz_db,
+                                       const char *tz);
+
+void       tz_info_free               (TzInfo     *tzinfo);
+
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (TzDB,   TimeZoneDateBaseFree)
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (TzInfo, tz_info_free)
+
 #endif

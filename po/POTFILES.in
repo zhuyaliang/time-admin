@@ -1,3 +1,5 @@
 src/main.c	     
 src/time-share.c
 src/time-tool.c
+src/time-zone.c
+src/time-map.c

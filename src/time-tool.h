@@ -36,4 +36,8 @@ void          SaveModifyTime    (GtkButton   *button,
 
 gboolean      GetNtpState       (TimeAdmin   *ta);
 
+const gchar  *GetTimeZone       (TimeAdmin   *ta);
+
+void          SetTimeZone       (GDBusProxy  *proxy,
+                                 const char  *zone);
 #endif

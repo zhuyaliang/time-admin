@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: time-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-12 17:59+0800\n"
+"POT-Creation-Date: 2019-04-16 18:47+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,67 +17,73 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/main.c:91
+#: src/main.c:93
 msgid "Time and Date Manager"
 msgstr ""
 
-#: src/main.c:125 src/main.c:167
+#: src/main.c:127 src/main.c:169
 msgid "open file"
 msgstr ""
 
-#: src/main.c:125
+#: src/main.c:127
 msgid "Create pid file failed"
 msgstr ""
 
-#: src/main.c:134
+#: src/main.c:136
 msgid "write file"
 msgstr ""
 
-#: src/main.c:134
+#: src/main.c:136
 msgid "write pid file failed"
 msgstr ""
 
-#: src/main.c:167
+#: src/main.c:169
 msgid "open pid file failed"
 msgstr ""
 
-#: src/main.c:172
+#: src/main.c:174
 msgid "read file"
 msgstr ""
 
-#: src/main.c:172
+#: src/main.c:174
 msgid "read pid file failed"
 msgstr ""
 
-#: src/main.c:208
+#: src/main.c:210
 msgid "Time Zone:"
 msgstr ""
 
-#: src/main.c:219
+#: src/main.c:216
+#, c-format
+msgctxt "timezone loc"
+msgid "%s"
+msgstr ""
+
+#: src/main.c:228
 msgid "Ntp Sync:"
 msgstr ""
 
-#: src/main.c:270 src/time-tool.c:212
+#: src/main.c:279 src/time-tool.c:280
 msgid "Set Time"
 msgstr ""
 
-#: src/main.c:307
+#: src/main.c:316
 msgid "Set Date"
 msgstr ""
 
-#: src/main.c:317
+#: src/main.c:326 src/time-zone.c:442
 msgid "Close"
 msgstr ""
 
-#: src/main.c:324
+#: src/main.c:333
 msgid "Save"
 msgstr ""
 
-#: src/main.c:363
+#: src/main.c:372
 msgid "g_bus_get_sync"
 msgstr ""
 
-#: src/main.c:376
+#: src/main.c:385
 msgid "g_bus_proxy_new"
 msgstr ""
 
@@ -85,10 +91,40 @@ msgstr ""
 msgid "GetNtpState"
 msgstr ""
 
-#: src/time-tool.c:151 src/time-tool.c:192
+#: src/time-tool.c:187
+msgid "Set time zone"
+msgstr ""
+
+#: src/time-tool.c:219 src/time-tool.c:260
 msgid "Set Ntp sync"
 msgstr ""
 
-#: src/time-tool.c:212
+#: src/time-tool.c:280
 msgid "NTP synchronization has been started, the modification is invalid"
+msgstr ""
+
+#: src/time-zone.c:263
+#, c-format
+msgctxt "timezone loc"
+msgid "%s, %s"
+msgstr ""
+
+#: src/time-zone.c:285
+msgid "UTC%:::z"
+msgstr ""
+
+#: src/time-zone.c:290
+msgid "%R"
+msgstr ""
+
+#: src/time-zone.c:353
+msgid "Time Zone"
+msgstr ""
+
+#: src/time-zone.c:434
+msgid "Time Zone Selection"
+msgstr ""
+
+#: src/time-zone.c:447
+msgid "Confirm"
 msgstr ""

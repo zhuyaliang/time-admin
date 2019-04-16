@@ -18,6 +18,9 @@
 #ifndef __TIME_SHARE_H__
 #define __TIME_SHARE_H__
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 #include <gtk/gtk.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -33,12 +36,14 @@
 #define PACKAGE    "time-admin"   
 #define LOCALEDIR  "/usr/share/locale/" 
 #define _(STRING)  gettext(STRING)
+#define C_(a,b)  gettext(b)
 #define TYPEMSG    "<span foreground='red'font_desc='13'>%s </span>"
 #define ERROR      1
 #define WARING     2
 #define INFOR      3
 #define QUESTION   4
 #define QUESTIONNORMAL   5
+#define GETTEXT_PACKAGE_TIMEZONES GETTEXT_PACKAGE "-timezones"
 
 
 GtkWidget *WindowLogin;
@@ -49,6 +54,7 @@ typedef struct
     GtkWidget        *HourSpin;
     GtkWidget        *MinuteSpin;
     GtkWidget        *SecondSpin;
+    GtkWidget        *TimeZoneButton;
     GtkWidget        *Calendar;
     GtkWidget        *CloseButton;
     GtkWidget        *SaveButton;
@@ -58,16 +64,30 @@ typedef struct
     gboolean          NtpState;
     GDBusConnection  *Connection;
     GDBusProxy       *proxy;
+    GtkWidget        *dialog;
+    GtkWidget        *TZconfire;
+    GtkWidget        *TZclose;
+    GtkWidget        *TimezoneEntry;
+    GtkWidget        *SearchBar;
+    GtkWidget        *map;
+    GtkListStore     *CityListStore;
+    GtkTreeModelSort *CityModelSort;
+
 }TimeAdmin;
 
-int          MessageReport         (const char  *Title,
-                                    const char  *Msg,
-                                    int          nType);
+int          MessageReport               (const char  *Title,
+                                          const char  *Msg,
+                                          int          nType);
 
-void         SetLableFontType      (GtkWidget   *Lable,
-                                    const char  *Color,
-                                    int          FontSzie,
-                                    const char  *Word);
+void         SetLableFontType            (GtkWidget   *Lable,
+                                          const char  *Color,
+                                          int          FontSzie,
+                                          const char  *Word);
 
-void         QuitApp               (TimeAdmin   *ta);
+void         QuitApp                     (TimeAdmin   *ta);
+
+GtkWidget*   DialogAddButtonWithIconName (GtkDialog   *dialog,
+                                          const gchar *button_text,
+                                          const gchar *icon_name,
+                                          gint         response_id);
 #endif
