@@ -140,4 +140,15 @@ GtkWidget* DialogAddButtonWithIconName (GtkDialog   *dialog,
 
     return button;
 }
-
+void SetTooltip(GtkWidget*box,gboolean mode)
+{
+    if(!mode)
+    {
+        gtk_widget_set_tooltip_markup(box,
+                                     _("Network time synchronization has been set up.prohibit Modification Time"));
+    }
+    else
+    {
+        gtk_widget_set_tooltip_markup(box,NULL);
+    }
+}

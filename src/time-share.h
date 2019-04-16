@@ -90,4 +90,7 @@ GtkWidget*   DialogAddButtonWithIconName (GtkDialog   *dialog,
                                           const gchar *button_text,
                                           const gchar *icon_name,
                                           gint         response_id);
+
+void         SetTooltip                  (GtkWidget   *box,
+                                          gboolean     mode);
 #endif

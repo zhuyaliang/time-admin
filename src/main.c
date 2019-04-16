@@ -272,6 +272,7 @@ static GtkWidget *GetSpinButton(int Initial,int Maximum,TimeAdmin *ta)
                       G_CALLBACK (ChangeTimeValue),
                       ta);
 
+    SetTooltip(SpinButton,!ta->NtpState); 
     return SpinButton;
 }    
 static GtkWidget *SetClock(TimeAdmin *ta)
@@ -327,6 +328,7 @@ static GtkWidget *SetDate(TimeAdmin *ta)
     LocalTime = GetCurrentTime();
     ta->Calendar = gtk_calendar_new ();
     gtk_widget_set_sensitive(ta->Calendar,!ta->NtpState);
+    SetTooltip(ta->Calendar,!ta->NtpState); 
     gtk_calendar_mark_day(GTK_CALENDAR(ta->Calendar),LocalTime->tm_mday);
     ta->OldDay = LocalTime->tm_mday;
     gtk_grid_attach(GTK_GRID(table) ,ta->Calendar, 0 , 1 , 3 , 3);
@@ -366,7 +368,6 @@ static void CreateClockInterface(TimeAdmin *ta)
 
     Vbox2 = SetClock(ta);
     gtk_box_pack_start(GTK_BOX(Vbox),Vbox2,TRUE,TRUE,8);
-    
     Vbox3 = SetDate(ta);
     gtk_box_pack_start(GTK_BOX(Vbox),Vbox3,TRUE,TRUE,8);
 }    

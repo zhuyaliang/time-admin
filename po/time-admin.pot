@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: time-admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-16 18:47+0800\n"
+"POT-Creation-Date: 2019-04-16 19:25+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,57 +49,61 @@ msgstr ""
 msgid "read pid file failed"
 msgstr ""
 
-#: src/main.c:210
-msgid "Time Zone:"
-msgstr ""
-
-#: src/main.c:216
+#: src/main.c:199
 #, c-format
 msgctxt "timezone loc"
 msgid "%s"
 msgstr ""
 
-#: src/main.c:228
+#: src/main.c:219
+msgid "Time Zone:"
+msgstr ""
+
+#: src/main.c:236
 msgid "Ntp Sync:"
 msgstr ""
 
-#: src/main.c:279 src/time-tool.c:280
+#: src/main.c:288 src/time-tool.c:283
 msgid "Set Time"
 msgstr ""
 
-#: src/main.c:316
+#: src/main.c:325
 msgid "Set Date"
 msgstr ""
 
-#: src/main.c:326 src/time-zone.c:442
+#: src/main.c:336 src/time-zone.c:442
 msgid "Close"
 msgstr ""
 
-#: src/main.c:333
+#: src/main.c:343
 msgid "Save"
 msgstr ""
 
-#: src/main.c:372
+#: src/main.c:381
 msgid "g_bus_get_sync"
 msgstr ""
 
-#: src/main.c:385
+#: src/main.c:394
 msgid "g_bus_proxy_new"
+msgstr ""
+
+#: src/time-share.c:148
+msgid "Network time synchronization has been set up.prohibit Modification Time"
 msgstr ""
 
 #: src/time-tool.c:123
 msgid "GetNtpState"
 msgstr ""
 
-#: src/time-tool.c:187
+#: src/time-tool.c:186
 msgid "Set time zone"
 msgstr ""
 
-#: src/time-tool.c:219 src/time-tool.c:260
+#: src/time-tool.c:222 src/time-tool.c:263
 msgid "Set Ntp sync"
 msgstr ""
 
-#: src/time-tool.c:280
+#: src/time-tool.c:283
 msgid "NTP synchronization has been started, the modification is invalid"
 msgstr ""
 
