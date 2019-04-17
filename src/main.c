@@ -206,7 +206,6 @@ static GtkWidget * TimeZoneAndNtp(TimeAdmin *ta)
     GtkWidget  *TimeZoneLabel;
     GtkWidget  *NtpSyncLabel;
     GtkWidget  *NtpSyncSwitch;
-    GTimeZone  *tz;
     const char *TimeZone;
     gboolean    NtpState;
     char       *ZoneName;
@@ -220,8 +219,7 @@ static GtkWidget * TimeZoneAndNtp(TimeAdmin *ta)
     gtk_grid_attach(GTK_GRID(table) ,TimeZoneLabel, 0 , 0 , 1 , 1);
     
     SetupTimezoneDialog(ta); 
-    tz = g_time_zone_new_local();
-    TimeZone = g_time_zone_get_identifier(tz);
+    TimeZone = GetTimeZone(ta);
     ZoneName = translate(TimeZone);
     ta->TimeZoneButton = gtk_button_new_with_label(ZoneName);
     g_signal_connect (ta->TimeZoneButton,

@@ -25,6 +25,7 @@
 #define  MATE_DESKTOP_USE_UNSTABLE_API
 
 #include <string.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <libintl.h>
 
@@ -32,7 +33,7 @@
 
 
 #define DEFAULT_TZ "Europe/London"
-
+#define BACKFILE   "/usr/share/time-admin/map/backward"
 static void LocationChanged(TimezoneMap  *map,
                             TzLocation   *location,TimeAdmin *ta);
 enum {
@@ -83,56 +84,53 @@ static void sort_locations_by_country (GPtrArray *locations)
 }
 static void load_backward_tz (TzDB *tz_db)
 {
-    g_auto(GStrv) lines = NULL;
-    g_autoptr(GBytes) bytes = NULL;
-    const char *contents;
-    guint i;
-    GFile *file;
+    FILE  *fp;
+    char buf[128] = { 0 };
 
     tz_db->backward = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 
-          
-    file = g_file_new_for_path("/usr/share/time-admin/map/backward");
-    bytes = g_file_load_bytes(file,NULL,NULL,NULL);
-    contents = (const char *) g_bytes_get_data (bytes, NULL);
-    
-    lines = g_strsplit (contents, "\n", -1);
-    g_object_unref(file);
-    for (i = 0; lines[i] != NULL; i++)
+    fp = fopen(BACKFILE,"r");
+    if(fp == NULL)
+    {
+        g_error("%s does not exist\r\n",BACKFILE);
+
+    }    
+    while(fgets(buf,128,fp)) 
     {
         g_auto(GStrv) items = NULL;
         guint j;
         char *real, *alias;
 
-        if (g_ascii_strncasecmp (lines[i], "Link\t", 5) != 0)
+        if (g_ascii_strncasecmp (buf, "Link\t", 5) != 0)
             continue;
 
-        items = g_strsplit (lines[i], "\t", -1);
+        items = g_strsplit (buf, "\t", -1);
         real = NULL;
         alias = NULL;
-    for (j = 1; items[j] != NULL; j++)
-    {
-        if (items[j][0] == '\0')
-            continue;
-        if (real == NULL)
+        for (j = 1; items[j] != NULL; j++)
         {
-            real = items[j];
-            continue;
+            if (items[j][0] == '\0')
+                continue;
+            if (real == NULL)
+            {
+                real = items[j];
+                continue;
+            }
+            alias = items[j];
+                break;
         }
-        alias = items[j];
-            break;
-    }
+        if (real == NULL || alias == NULL)
+            g_warning ("Could not parse line: %s", buf);
 
-    if (real == NULL || alias == NULL)
-        g_warning ("Could not parse line: %s", lines[i]);
+        /* We don't need more than one name for it */
+        if (g_str_equal (real, "Etc/UTC") ||
+            g_str_equal (real, "Etc/UCT"))
+            real = "Etc/GMT";
 
-    /* We don't need more than one name for it */
-    if (g_str_equal (real, "Etc/UTC") ||
-        g_str_equal (real, "Etc/UCT"))
-        real = "Etc/GMT";
-
-    g_hash_table_insert (tz_db->backward, g_strdup (alias), g_strdup (real));
-    }
+        g_hash_table_insert (tz_db->backward, g_strdup (alias), g_strdup (real));
+        
+    }    
+    fclose(fp);
 }
 
 TzDB *tz_load_db (void)
@@ -417,6 +415,7 @@ static void ChoooseTimezoneDone (GtkWidget *widget,
     
     ZoneCity = translated_city_name(map->location);
     gtk_button_set_label((GTK_BUTTON(ta->TimeZoneButton)),ZoneCity); 
+    gtk_widget_hide_on_delete(GTK_WIDGET(ta->dialog));
 }
 
 static void ChoooseTimezoneClose(GtkWidget  *widget,
