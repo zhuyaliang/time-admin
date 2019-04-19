@@ -1,5 +1,4 @@
 # Chinese translations for time-admin package
-# time-admin �������ļ������ķ���.
 # Copyright (C) 2019 THE time-admin'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the time-admin package.
 # Automatically generated, 2019.
@@ -9,7 +8,7 @@ msgstr ""
 "Project-Id-Version: time-admin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-16 19:25+0800\n"
-"PO-Revision-Date: 2019-03-12 18:01+0800\n"
+"PO-Revision-Date: 2019-04-19 15:12+0800\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: chinese\n"
 "Language: zh_CN\n"
@@ -22,35 +21,35 @@ msgstr ""
 
 #: src/main.c:93
 msgid "Time and Date Manager"
-msgstr ""
+msgstr "时间日期管理"
 
 #: src/main.c:127 src/main.c:169
 msgid "open file"
-msgstr ""
+msgstr "打开文件"
 
 #: src/main.c:127
 msgid "Create pid file failed"
-msgstr ""
+msgstr "创建pid文件失败"
 
 #: src/main.c:136
 msgid "write file"
-msgstr ""
+msgstr "写入文件"
 
 #: src/main.c:136
 msgid "write pid file failed"
-msgstr ""
+msgstr "写入pid文件失败"
 
 #: src/main.c:169
 msgid "open pid file failed"
-msgstr ""
+msgstr "打开pid文件失败"
 
 #: src/main.c:174
 msgid "read file"
-msgstr ""
+msgstr "读文件"
 
 #: src/main.c:174
 msgid "read pid file failed"
-msgstr ""
+msgstr "读pid文件失败"
 
 #: src/main.c:199
 #, c-format
@@ -60,27 +59,27 @@ msgstr "%s"
 
 #: src/main.c:219
 msgid "Time Zone:"
-msgstr ""
+msgstr "时区"
 
 #: src/main.c:236
 msgid "Ntp Sync:"
-msgstr ""
+msgstr "ntp同步"
 
 #: src/main.c:288 src/time-tool.c:283
 msgid "Set Time"
-msgstr ""
+msgstr "设置时间"
 
 #: src/main.c:325
 msgid "Set Date"
-msgstr ""
+msgstr "设置日期"
 
 #: src/main.c:336 src/time-zone.c:442
 msgid "Close"
-msgstr ""
+msgstr "关闭"
 
 #: src/main.c:343
 msgid "Save"
-msgstr ""
+msgstr "保存"
 
 #: src/main.c:381
 msgid "g_bus_get_sync"
@@ -92,7 +91,7 @@ msgstr ""
 
 #: src/time-share.c:148
 msgid "Network time synchronization has been set up.prohibit Modification Time"
-msgstr ""
+msgstr "网络同步已经开启，进制手动修改时间"
 
 #: src/time-tool.c:123
 msgid "GetNtpState"
@@ -126,12 +125,12 @@ msgstr ""
 
 #: src/time-zone.c:353
 msgid "Time Zone"
-msgstr ""
+msgstr "时区"
 
 #: src/time-zone.c:434
 msgid "Time Zone Selection"
-msgstr ""
+msgstr "时区选择"
 
 #: src/time-zone.c:447
 msgid "Confirm"
-msgstr ""
+msgstr "确认"

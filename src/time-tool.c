@@ -220,6 +220,7 @@ gboolean ChangeNtpSync(GtkSwitch *widget,gboolean state,gpointer data)
     if(ret == NULL)
     {
         MessageReport(_("Set Ntp sync"),error->message,ERROR);
+        return TRUE;
     }    
     else
     {
@@ -228,7 +229,7 @@ gboolean ChangeNtpSync(GtkSwitch *widget,gboolean state,gpointer data)
         Update_Clock_Start(ta);
         UpdateDate(ta,state);
     }    
-    return TRUE;
+    return FALSE;
 }   
 static guint GetTimeStamp(TimeAdmin *ta)
 {
