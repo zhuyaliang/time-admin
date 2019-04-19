@@ -236,6 +236,10 @@ static GtkWidget * TimeZoneAndNtp(TimeAdmin *ta)
     
     NtpSyncSwitch = gtk_switch_new();
     NtpState = GetNtpState(ta);
+    if(NtpState)
+    {
+        ReloadNtp(ta->proxy,NtpState);
+    }    
     ta->NtpState = NtpState;
     gtk_switch_set_state (GTK_SWITCH(NtpSyncSwitch),
                           NtpState);
