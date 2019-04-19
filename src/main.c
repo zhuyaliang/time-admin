@@ -239,7 +239,6 @@ static GtkWidget * TimeZoneAndNtp(TimeAdmin *ta)
     ta->NtpState = NtpState;
     gtk_switch_set_state (GTK_SWITCH(NtpSyncSwitch),
                           NtpState);
-
     gtk_grid_attach(GTK_GRID(table) ,NtpSyncSwitch, 1 , 1 , 1 , 1);
     g_signal_connect (G_OBJECT(NtpSyncSwitch),
                      "state-set",

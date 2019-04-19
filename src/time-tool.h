@@ -24,7 +24,7 @@ void          Update_Clock_Start(TimeAdmin   *ta);
 
 void          Update_Clock_Stop (TimeAdmin   *ta);
 
-void          ChangeNtpSync     (GtkSwitch   *widget,
+gboolean      ChangeNtpSync     (GtkSwitch   *widget,
                                  gboolean     state,
                                  gpointer     data);
 

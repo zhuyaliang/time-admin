@@ -175,7 +175,7 @@ void SetTimeZone(GDBusProxy *proxy,const char *zone)
     
     ret = g_dbus_proxy_call_sync (proxy,
                                  "SetTimezone",
-                                  g_variant_new ("(sb)",zone,0),
+                                  g_variant_new ("(sb)",zone,1),
                                   G_DBUS_CALL_FLAGS_NONE,
                                   -1,
                                   NULL,
@@ -203,12 +203,12 @@ static void ChangeSpinBttonState(TimeAdmin *ta,gboolean State)
     gtk_widget_set_sensitive(ta->Calendar,  !State);
     SetTooltip(ta->Calendar,!ta->NtpState); 
 }    
-void ChangeNtpSync(GtkSwitch *widget,gboolean state,gpointer data)
+gboolean ChangeNtpSync(GtkSwitch *widget,gboolean state,gpointer data)
 {
     TimeAdmin *ta = (TimeAdmin *)data;
     GError *error = NULL;
     GVariant *ret;
-    
+   
     ret = g_dbus_proxy_call_sync (ta->proxy,
                                  "SetNTP",
                                   g_variant_new ("(bb)",state,state),
@@ -228,6 +228,7 @@ void ChangeNtpSync(GtkSwitch *widget,gboolean state,gpointer data)
         Update_Clock_Start(ta);
         UpdateDate(ta,state);
     }    
+    return TRUE;
 }   
 static guint GetTimeStamp(TimeAdmin *ta)
 {
