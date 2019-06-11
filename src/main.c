@@ -156,7 +156,7 @@ static int RecordPid(void)
 ******************************************************************************/
 static gboolean ProcessRuning(void)
 {
-    int fd = 0;
+    int fd;
     int pid = 0;
     gboolean Run = FALSE;
     char ReadBuf[30] = { 0 };
@@ -393,6 +393,7 @@ static gboolean InitDbusProxy(TimeAdmin *ta)
     if(ta->proxy == NULL)
     {
         MessageReport(_("g_bus_proxy_new"),error->message,ERROR);
+        g_error_free(error);
         return FALSE;
     }    
 
