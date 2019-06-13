@@ -333,13 +333,13 @@ cc_timezone_map_draw (GtkWidget *widget,
     /* paint hilight */
     if (gtk_widget_is_sensitive (widget))
     {
-        file = g_strdup_printf ("/usr/share/time-admin/map/timezone_%s.png",
+        file = g_strdup_printf (MAPDIR"timezone_%s.png",
                                 g_ascii_formatd (buf, sizeof (buf),
                                "%g", map->selected_offset));
     }
     else
     {
-        file = g_strdup_printf ("/usr/share/time-admin/map/timezone_%s_dim.png",
+        file = g_strdup_printf (MAPDIR"timezone_%s_dim.png",
                                 g_ascii_formatd (buf, sizeof (buf),
                                "%g", map->selected_offset));
     }
@@ -535,15 +535,6 @@ timezone_map_class_init (TimezoneMapClass *klass)
                                                g_cclosure_marshal_VOID__POINTER,
                                                G_TYPE_NONE, 1,
                                                G_TYPE_POINTER);
-/*
-    signals[LOCATION_CHANGED] = g_signal_new ("location-changed",
-                                               G_TYPE_FROM_CLASS (klass),
-                                               G_SIGNAL_RUN_LAST,
-                                               0,
-                                               NULL,NULL,
-                                               g_cclosure_marshal_VOID__VOID,
-                                               G_TYPE_NONE, 0);
-*/
 }
 
 static void
@@ -551,14 +542,14 @@ timezone_map_init (TimezoneMap *map)
 {
     GError *err = NULL;
     
-    map->orig_background = gdk_pixbuf_new_from_file ("/usr/share/time-admin/map/bg.png",&err);
+    map->orig_background = gdk_pixbuf_new_from_file (MAPDIR"bg.png",&err);
     if (!map->orig_background)
     {   
         g_warning ("Could not load background image: %s",
                    (err) ? err->message : "Unknown error");
         g_clear_error (&err);
     }
-    map->orig_background_dim = gdk_pixbuf_new_from_file("/usr/share/time-admin/map/bg_dim.png",&err);
+    map->orig_background_dim = gdk_pixbuf_new_from_file(MAPDIR"bg_dim.png",&err);
     if (!map->orig_background_dim)
     {
         g_warning ("Could not load background image: %s",
@@ -566,7 +557,7 @@ timezone_map_init (TimezoneMap *map)
         g_clear_error (&err);
     }
 
-    map->orig_color_map = gdk_pixbuf_new_from_file ("/usr/share/time-admin/map/cc.png",&err);
+    map->orig_color_map = gdk_pixbuf_new_from_file (MAPDIR"cc.png",&err);
     if (!map->orig_color_map)
     {
         g_warning ("Could not load background image: %s",
@@ -574,7 +565,7 @@ timezone_map_init (TimezoneMap *map)
         g_clear_error (&err);
     }
 
-    map->pin = gdk_pixbuf_new_from_file ("/usr/share/time-admin/map/pin.png",&err);
+    map->pin = gdk_pixbuf_new_from_file (MAPDIR"pin.png",&err);
     if (!map->pin)
     {
         g_warning ("Could not load pin icon: %s",

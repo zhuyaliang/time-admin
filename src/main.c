@@ -21,7 +21,8 @@
 
 #define  LOCKFILE               "/tmp/time-admin.pid"
 #define  TIME_ADMIN_PERMISSION  "org.mate.user.admin.administration"
-#define  ICONFILE               "/usr/share/time-admin/icon/time-admin.png"
+#define  APPICON                "time-admin.png"
+#define  ICONFILE               ICONDIR APPICON
 
 static gboolean CheckClockHealth(gpointer data)
 {
@@ -83,11 +84,11 @@ static void InitMainWindow(TimeAdmin *ta)
 {
     GtkWidget *Window;
     GdkPixbuf *AppIcon;
-    //GError    *error = NULL;
 
     Window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     ta->MainWindow = WindowLogin = Window;
     gtk_window_set_deletable(GTK_WINDOW(Window),FALSE);
+    gtk_window_set_resizable(GTK_WINDOW(Window),FALSE);
     gtk_window_set_hide_titlebar_when_maximized(GTK_WINDOW(Window),TRUE);
     gtk_window_set_position(GTK_WINDOW(Window), GTK_WIN_POS_CENTER);
     gtk_window_set_title(GTK_WINDOW(Window),_("Time and Date Manager")); 
@@ -98,15 +99,6 @@ static void InitMainWindow(TimeAdmin *ta)
                      G_CALLBACK(on_window_quit),
                      ta);
 
-   /* 
-    ua->Permission = polkit_permission_new_sync (USER_ADMIN_PERMISSION, NULL, NULL, &error);
-    ua->ButtonLock = gtk_lock_button_new(ua->Permission);
-    gtk_lock_button_set_permission(GTK_LOCK_BUTTON (ua->ButtonLock),ua->Permission);
-    g_signal_connect(ua->Permission, 
-                    "notify",
-                     G_CALLBACK (on_permission_changed), 
-                     ua);
-  */  
     AppIcon = GetAppIcon();
     if(AppIcon)
     {
@@ -403,8 +395,8 @@ int main(int argc, char **argv)
 {
     TimeAdmin ta;
 
-    bindtextdomain (PACKAGE, LOCALEDIR);   
-    textdomain (PACKAGE); 
+    bindtextdomain (GETTEXT_PACKAGE,LUNAR_CALENDAR_LOCALEDIR);   
+    textdomain (GETTEXT_PACKAGE); 
     bind_textdomain_codeset (GETTEXT_PACKAGE_TIMEZONES, "UTF-8"); 
     
     gtk_init(&argc, &argv);
