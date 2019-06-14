@@ -88,9 +88,10 @@ add_global_link_arguments(
 # Dependencies
 gtk_req_version = '>= 3.0.0'
 gdk_pixbuf_dep =  '>=2.23.0'
+mate_desktop_dep = '>=1.21.1'
 gtk_deps = dependency('gtk+-3.0', version: gtk_req_version)
 gdk_deps = dependency('gdk-pixbuf-2.0', version: '>= 2.23.0')
-mt_deps = dependency('mate-desktop-2.0')
+mt_deps = dependency('mate-desktop-2.0',version: mate_desktop_dep)
 math_deps = cc.find_library('m', required: true)
 polkit_deps = dependency('polkit-gobject-1')
 
