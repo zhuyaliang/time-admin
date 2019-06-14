@@ -21,7 +21,7 @@
 #include "time-map.h"
 
 #define  LOCKFILE               "/tmp/time-admin.pid"
-#define  TIME_ADMIN_PERMISSION  "org.gnome.controlcenter.datetime.configure"
+#define  TIME_ADMIN_PERMISSION "org.freedesktop.timedate1.set-time"
 #define  APPICON                "time-admin.png"
 #define  ICONFILE               ICONDIR APPICON
 
@@ -95,7 +95,6 @@ static void UpdatePermission(TimeAdmin *ta)
     gtk_widget_set_sensitive(ta->SaveButton,     is_authorized);
     gtk_widget_set_sensitive(ta->NtpSyncSwitch,  is_authorized);
 }
-
 
 static void on_permission_changed (GPermission *permission,
                                    GParamSpec  *pspec,
@@ -377,6 +376,7 @@ static GtkWidget *SetDate(TimeAdmin *ta)
     gtk_grid_attach(GTK_GRID(table) ,ta->ButtonLock, 1 , 5 , 1 , 1);
     
     ta->SaveButton  = gtk_button_new_with_label (_("Save"));
+    gtk_widget_set_sensitive(ta->SaveButton,!ta->NtpState);
     gtk_grid_attach(GTK_GRID(table) ,ta->SaveButton, 2 , 5 , 1 , 1);
     g_signal_connect (ta->SaveButton,
                      "clicked",
@@ -415,7 +415,7 @@ static gboolean InitDbusProxy(TimeAdmin *ta)
     if(ta->Connection == NULL)
     {
         MessageReport(_("g_bus_get_sync"),error->message,ERROR);
-        return FALSE;
+        goto EXIT;
     } 
     ta->proxy = g_dbus_proxy_new_sync (ta->Connection,
                                        G_DBUS_PROXY_FLAGS_NONE,
@@ -428,11 +428,13 @@ static gboolean InitDbusProxy(TimeAdmin *ta)
     if(ta->proxy == NULL)
     {
         MessageReport(_("g_bus_proxy_new"),error->message,ERROR);
-        g_error_free(error);
-        return FALSE;
+        goto EXIT;
     }    
 
     return TRUE;
+EXIT:
+    g_error_free(error);
+    return FALSE;
 }    
 int main(int argc, char **argv)
 {
