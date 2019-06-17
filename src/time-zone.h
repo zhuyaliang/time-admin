@@ -51,13 +51,13 @@ typedef struct TzInfo
     gint daylight;
 }TzInfo;
 TzDB      *tz_load_db                 (void);
+void       TimeZoneDateBaseFree       (TzDB      *db);
 
 void       SetupTimezoneDialog        (TimeAdmin *ta);
 
 void       RunTimeZoneDialog          (GtkButton *button,
                                        gpointer   data);
 
-void       TimeZoneDateBaseFree       (TzDB      *db);
 
 GPtrArray *tz_get_locations           (TzDB *db);
 
@@ -70,7 +70,5 @@ char      *tz_info_get_clean_name     (TzDB       *tz_db,
 
 void       tz_info_free               (TzInfo     *tzinfo);
 
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (TzDB,   TimeZoneDateBaseFree)
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (TzInfo, tz_info_free)
-
 #endif
