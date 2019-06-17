@@ -84,15 +84,15 @@ static void CloseWindow (GtkButton *button,gpointer data)
 static void UpdatePermission(TimeAdmin *ta)
 {
     gboolean is_authorized;
-    
+
     is_authorized = g_permission_get_allowed (G_PERMISSION (ta->Permission));
 
-    gtk_widget_set_sensitive(ta->HourSpin,       is_authorized);
-    gtk_widget_set_sensitive(ta->MinuteSpin,     is_authorized);
-    gtk_widget_set_sensitive(ta->SecondSpin,     is_authorized);
+    gtk_widget_set_sensitive(ta->HourSpin,       is_authorized & !ta->NtpState);
+    gtk_widget_set_sensitive(ta->MinuteSpin,     is_authorized & !ta->NtpState);
+    gtk_widget_set_sensitive(ta->SecondSpin,     is_authorized & !ta->NtpState);
     gtk_widget_set_sensitive(ta->TimeZoneButton, is_authorized);
-    gtk_widget_set_sensitive(ta->Calendar,       is_authorized);
-    gtk_widget_set_sensitive(ta->SaveButton,     is_authorized);
+    gtk_widget_set_sensitive(ta->Calendar,       is_authorized & !ta->NtpState);
+    gtk_widget_set_sensitive(ta->SaveButton,     is_authorized & !ta->NtpState);
     gtk_widget_set_sensitive(ta->NtpSyncSwitch,  is_authorized);
 }
 
