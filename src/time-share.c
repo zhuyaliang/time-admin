@@ -134,9 +134,11 @@ GtkWidget* DialogAddButtonWithIconName (GtkDialog   *dialog,
 
     gtk_button_set_use_underline (GTK_BUTTON (button), TRUE);
     gtk_style_context_add_class (gtk_widget_get_style_context (button), "text-button");
-    gtk_widget_set_can_default (button, TRUE);
-//    gtk_widget_show (button);
-    gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button, response_id);
+    if(dialog)
+    {
+        gtk_widget_set_can_default (button, TRUE);
+        gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button, response_id);
+    }
 
     return button;
 }

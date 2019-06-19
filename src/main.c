@@ -136,16 +136,9 @@ static void InitMainWindow(TimeAdmin *ta)
                                                  &error);
     if (ta->Permission == NULL)
     {
+        g_warning ("Failed to acquire %s: %s", TIME_ADMIN_PERMISSION, error->message);
         g_error_free (error);
-        return;
     }
-    ta->ButtonLock = gtk_lock_button_new(ta->Permission);
-    gtk_lock_button_set_permission(GTK_LOCK_BUTTON (ta->ButtonLock),ta->Permission);
-    gtk_widget_grab_focus(ta->ButtonLock);
-    g_signal_connect(ta->Permission,
-                    "notify",
-                     G_CALLBACK (on_permission_changed),
-                     ta);
 }
 
 static int RecordPid(void)
@@ -362,16 +355,24 @@ static GtkWidget *SetDate(TimeAdmin *ta)
     ta->OldDay = LocalTime->tm_mday;
     gtk_grid_attach(GTK_GRID(table) ,ta->Calendar, 0 , 2 , 4 , 3);
 
-    ta->CloseButton = gtk_button_new_with_label (_("Close"));
+    ta->CloseButton = DialogAddButtonWithIconName(NULL,_("Close"),"gtk-close",0);
     gtk_grid_attach(GTK_GRID(table) ,ta->CloseButton, 3 , 5 , 1 , 1);
     g_signal_connect (ta->CloseButton,
                      "clicked",
                       G_CALLBACK (CloseWindow),
                       ta);
+    if (ta->Permission)
+    {
+        ta->ButtonLock = gtk_lock_button_new (ta->Permission);
+        gtk_lock_button_set_permission (GTK_LOCK_BUTTON (ta->ButtonLock),ta->Permission);
+        gtk_grid_attach (GTK_GRID(table), ta->ButtonLock, 0, 5, 1, 1);
+        g_signal_connect (ta->Permission,
+                          "notify",
+                          G_CALLBACK (on_permission_changed),
+                          ta);
+    }
     
-    gtk_grid_attach(GTK_GRID(table) ,ta->ButtonLock, 0 , 5 , 1 , 1);
-    
-    ta->SaveButton  = gtk_button_new_with_label (_("Save"));
+    ta->SaveButton  = DialogAddButtonWithIconName(NULL,_("Save"),"gtk-save",0);
     gtk_widget_set_sensitive(ta->SaveButton,!ta->NtpState);
     gtk_grid_attach(GTK_GRID(table) ,ta->SaveButton, 2 , 5 , 1 , 1);
     g_signal_connect (ta->SaveButton,
